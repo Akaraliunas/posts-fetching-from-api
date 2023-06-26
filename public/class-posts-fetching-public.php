@@ -104,10 +104,10 @@ class Posts_Fetching_Public {
 
 	function init_posts_shortcode($atts)
 	{
-		add_shortcode('random_posts', [__NAMESPACE__ . '\\Posts_Fetching_Public', 'custom_api_module_shortcode'],);
+		add_shortcode('random_posts', [__NAMESPACE__ . '\\Posts_Fetching_Public', 'random_posts_shortcode'],);
 	}
 
-	function custom_api_module_shortcode($atts)
+	function random_posts_shortcode($atts)
 	{
 		$atts = shortcode_atts(array(
 			'count' => get_option('posts_count', ''),
