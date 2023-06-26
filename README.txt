@@ -1,9 +1,20 @@
-# Fetching Posts from API
+=== Fetching Posts from API ===
+Contributors: (this should be a list of wordpress.org userid's)
+Donate link: https://https://karaliunas.dev
+Tags: comments, spam
+Requires at least: 3.0.1
+Tested up to: 3.4
+Stable tag: 4.3
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+
+== Description ==
 
 Plugin for fetching and displaying posts via shortcode from an Custom API.
 
 
-## Installation
+== Installation ==
 
 1. Upload `posts-fetching.php` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
