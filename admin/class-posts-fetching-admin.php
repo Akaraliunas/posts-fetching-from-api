@@ -111,7 +111,7 @@ class Posts_Fetching_Admin {
 			update_option('default_order', $_POST['default_order']);
 
 			// Display a success message
-			echo '<div class="notice notice-success"><p>Settings saved successfully.</p></div>';
+			echo '<div class="notice notice-success"><p>' . __('Settings saved successfully.') . '</p></div>';
 		}
 
 		// Get the current settings values
@@ -137,7 +137,7 @@ class Posts_Fetching_Admin {
 
 	function my_plugin_add_settings_link($links)
 	{
-		$settings_link = '<a href="' . admin_url('admin.php?page=posts-fetching-settings') . '">Settings</a>';
+		$settings_link = '<a href="' . admin_url('admin.php?page=posts-fetching-settings') . '">' . __('Settings') . '</a>';
 		array_push($links, $settings_link);
 		return $links;
 	}

@@ -126,7 +126,7 @@ class Posts_Fetching_Public {
 			$response = wp_remote_get($api_url);
 		
 			if (is_wp_error($response)) {
-				return 'Failed to fetch posts from the API.';
+				return __('Failed to fetch posts from the API.');
 			}
 		
 			$posts = json_decode(wp_remote_retrieve_body($response), true);
@@ -134,7 +134,7 @@ class Posts_Fetching_Public {
 			
 		
 			if (!$posts) {
-				return 'No posts found.';
+				return __('No posts found.');
 			}
 		
 			switch ($order) {
