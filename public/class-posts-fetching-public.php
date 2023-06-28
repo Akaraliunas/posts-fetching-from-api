@@ -122,37 +122,11 @@ class Posts_Fetching_Public {
 		if ($cached_posts !== false) {
 			$posts = $cached_posts;
 		} else {
-			$api_url = get_option('api_url', '');
-			$response = wp_remote_get($api_url);
-		
-			if (is_wp_error($response)) {
-				return __('Failed to fetch posts from the API.');
-			}
-		
-			$posts = json_decode(wp_remote_retrieve_body($response), true);
-
-			
-		
-			if (!$posts) {
-				return __('No posts found.');
-			}
-		
-			switch ($order) {
-				case 'desc':
-					usort($posts, fn($a, $b) => $a['id'] <=> $b['id']);
-					break;
-				
-				case 'asc':
-					usort($posts, fn($a, $b) => $b['id'] <=> $a['id']);
-					break;
-			}
-
-			$posts = array_slice($posts, 0, $count);
+			$posts = Posts_Fetching_Public::fetch_posts($order, $count);
 			set_transient($cache_key, $posts, 3600);
 		}
 
 		$output = '';
-
 		ob_start();
 		include plugin_dir_path( __FILE__ ) . 'partials/posts-fetching-public-display.php';
 		$output = ob_get_clean();
@@ -160,4 +134,36 @@ class Posts_Fetching_Public {
 		return $output;
 	}
 
+	public static function fetch_posts($order, $count) {
+		$api_url = get_option('api_url', '');
+		$response = wp_remote_get($api_url);
+	
+		if (is_wp_error($response)) {
+			return __('Failed to fetch posts from the API.');
+		}
+	
+		$posts = json_decode(wp_remote_retrieve_body($response), true);
+	
+		if (!$posts) {
+			return __('No posts found.');
+		}
+	
+		Posts_Fetching_Public::sort_posts($posts, $order);
+
+		return array_slice($posts, 0, $count);
+	}
+
+	public static function sort_posts($posts, $order) {
+		switch ($order) {
+			case 'desc':
+				usort($posts, fn($a, $b) => $a['id'] <=> $b['id']);
+				break;
+			
+			case 'asc':
+				usort($posts, fn($a, $b) => $b['id'] <=> $a['id']);
+				break;
+		}
+
+		return $posts;
+	}
 }
