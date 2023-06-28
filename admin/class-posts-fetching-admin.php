@@ -102,7 +102,7 @@ class Posts_Fetching_Admin {
 
 		
 	// Callback function to display the settings page
-	function posts_fetching_settings_page() {
+	public static function posts_fetching_settings_page() {
 		// Check if the form is submitted
 		if (isset($_POST['posts_fetching_settings_submit'])) {
 			// Save the settings values
@@ -123,7 +123,7 @@ class Posts_Fetching_Admin {
 	}
 
 	// Callback function to add the settings page to the WordPress admin menu
-	function posts_fetching_add_settings_page() {
+	public function posts_fetching_add_settings_page() {
 		add_menu_page(
 			'Posts fetching',
 			'Posts fetching',
@@ -135,7 +135,7 @@ class Posts_Fetching_Admin {
 		);
 	}
 
-	function my_plugin_add_settings_link($links)
+	public function my_plugin_add_settings_link($links)
 	{
 		$settings_link = '<a href="' . admin_url('admin.php?page=posts-fetching-settings') . '">' . __('Settings') . '</a>';
 		array_push($links, $settings_link);
